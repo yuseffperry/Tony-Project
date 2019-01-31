@@ -20,7 +20,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
 		    echo 'SonarQube...'
-		    withSonarQubeEnv('SonarQube Scanner') {
+		    withSonarQubeEnv('SonarQube') {
 		    sh '${mvnHome}/bin/mvn sonarqube -Dsonar.projectVersion=0.1'
 		     }
             }
