@@ -5,9 +5,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-		echo 'Building...'
 		def mvnHome = tool name: 'maven', type: 'maven'
-		sh "${mvnHome}/bin/mvn package"
+		sh '${mvnHome}/bin/mvn package'
             }
         }
         stage('Test') {
