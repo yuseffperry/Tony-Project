@@ -9,7 +9,8 @@ pipeline {
         stage('Build') {
             steps {
 		echo 'Building...'
-		sh '${mvnHome}/bin/mvn package'
+		//sh '${mvnHome}/bin/mvn package'
+		bat '${mvnHome}\\bin\\mvn package'
             }
         }
         stage('Test') {
