@@ -32,7 +32,7 @@ pipeline {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
-		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectVersion=0.1 -Dsonar.sources=src sonar.projectKey=org.sonarqube:yuseffperry'
+		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectVersion=0.1 -Dsonar.sources=src -Dsonar.projectKey=org.sonarqube:yuseffperry'
 		  }
             }
         }
