@@ -2,11 +2,6 @@ pipeline {
     agent any
 
 
-    tools {
-	def mvnHome = tool name: 'maven', type: 'maven'
-	jdk 'java8'
-    }
-
     stages {
         stage('Build') {
             steps {
