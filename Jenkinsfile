@@ -12,7 +12,8 @@ pipeline {
 		//sh '${mvnHome}/bin/mvn package'
 		//bat "cd ${mvnHome}\\bin && mvn package -f "C:\\Program Files (x86)\\Jenkins\\workspace\\JacocoExample""
 		bat """
-			cd ${mvnHome}\\bin && mvn package -f "C:\\Program Files (x86)\\Jenkins\\workspace\\JacocoExample"
+			cd ${mvnHome}\\bin 
+			mvn package -f "C:\\Program Files (x86)\\Jenkins\\workspace\\JacocoExample"
 		"""
             }
         }
