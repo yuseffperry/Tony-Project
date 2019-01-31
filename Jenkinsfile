@@ -16,6 +16,7 @@ pipeline {
         stage('Test') {
             steps {
 		    echo 'Testing...'
+		    sh '${mvnHome}/bin/mvn clean jacoco:prepare-agent install jacoco:report'
             }
         }
         stage('SonarQube Analysis') {
