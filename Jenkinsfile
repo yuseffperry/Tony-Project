@@ -17,23 +17,23 @@ pipeline {
             steps {
 		    echo 'Testing...'
 		    sh '${mvnHome}/bin/mvn clean jacoco:prepare-agent install jacoco:report'
-		    junit allowEmptyResults: true, testResults: 'target/test-results/test/*.xml'
+		    /*junit allowEmptyResults: true, testResults: 'target/test-results/test/*.xml'
 		    publishHTML([allowMissing: true,
 		      alwaysLinkToLastBuild: true,
 		      keepAll: false,
 		      reportDir: 'target/reports/tests/test',
-		      reportFiles: 'index.html',
+		      reportFiles: 'index.html'
 		      reportName: 'Jacoco Exmaple Test Results',
 		      reportTitles: ''
-		     ])
+		   ])*/
             }
         }
         stage('SonarQube Analysis') {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
-		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectVersion=0.1 -Dsonar.sources=.'
-		     }
+		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectVersion=0.1 -Dsonar.sources=src sonar.projectKey=org.sonarqube:yuseffperry'
+		  }
             }
         }
         stage('Deploy') {
