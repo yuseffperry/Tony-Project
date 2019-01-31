@@ -22,7 +22,7 @@ pipeline {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
-		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectVersion=0.1'
+		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectVersion=0.1 -Dsonar.sources=.'
 		     }
             }
         }
