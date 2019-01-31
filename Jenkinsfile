@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
 	def mvnHome = tool name: 'maven', type: 'maven'
+	def sonarqubeScannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
 
 
@@ -20,8 +21,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
 		    echo 'SonarQube...'
-		    withSonarQubeEnv('SonarQube') {
-		    sh '${mvnHome}/bin/mvn sonarqube -Dsonar.projectVersion=0.1'
+		    withSonarQubeEnv('SonarQube Scanner') {
+		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.projectVersion=0.1'
 		     }
             }
         }
