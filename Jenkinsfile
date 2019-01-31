@@ -10,7 +10,8 @@ pipeline {
             steps {
 		echo 'Building...'
 		//sh '${mvnHome}/bin/mvn package'
-		bat "cd ${mvnHome}\\bin && mvn package -f "'C:\\Program Files (x86)\\Jenkins\\workspace\\JacocoExample'""
+		//bat "cd ${mvnHome}\\bin && mvn package -f "C:\\Program Files (x86)\\Jenkins\\workspace\\JacocoExample""
+		bat 'cd C:\\Program Files (x86)\\Jenkins\\tools\\hudson.tasks.Maven_MavenInstallation\\maven\\bin && mvn package -f "C:\\Program Files (x86)\\Jenkins\\workspace\\JacocoExample"'
             }
         }
         stage('Test') {
