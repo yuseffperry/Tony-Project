@@ -22,7 +22,7 @@ pipeline {
 		      alwaysLinkToLastBuild: true,
 		      keepAll: false,
 		      reportDir: 'target/reports/tests/test',
-		      reportFiles: 'index.html'
+		      reportFiles: 'index.html',
 		      reportName: 'Jacoco Exmaple Test Results',
 		      reportTitles: ''
 		     ])
