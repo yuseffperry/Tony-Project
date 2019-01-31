@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
 		echo 'Building...'
-		sh '${mvnHome}/bin/mvn package'
+		sh '${mvnHome}/bin/mvn install'
             }
         }
         stage('Test') {
