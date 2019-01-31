@@ -8,16 +8,21 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-		echo 'Building...'
-		sh '${mvnHome}/bin/mvn install'
+		    echo 'Building...'
+		    sh '${mvnHome}/bin/mvn install'
             }
         }
         stage('Test') {
             steps {
-		echo 'Testing...'
-                sh './jenkins_build.sh'
-                junit '*/build/test-results/*.xml'
-                step( [ $class: 'JacocoPublisher' ] )
+		    echo 'Testing...'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+		    echo 'SonarQube...'
+		    withSonarQubeEnv('SonarQube Scanner') {
+		    sh '${mvnHome}/bin/mvn sonarqube -Dsonar.projectVersion=0.1'
+		     }
             }
         }
         stage('Deploy') {
