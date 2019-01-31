@@ -32,7 +32,7 @@ pipeline {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
-		    sh '${sonarqubeScannerHome}/bin/sonar-scanner
+		    sh '${sonarqubeScannerHome}/bin/sonar-scanner'
 		  }
             }
         }
