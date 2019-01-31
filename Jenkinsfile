@@ -3,7 +3,7 @@ pipeline {
 
 
     tools {
-	maven 'maven'
+	def mvnHome = tool name: 'maven', type: 'maven'
 	jdk 'java8'
     }
 
@@ -11,8 +11,8 @@ pipeline {
         stage('Build') {
             steps {
 		echo 'Building...'
-		sh 'mvn --version'
-		sh './mvn package'
+		def mvnHome = tool name: 'maven', type: 'maven'
+		sh '${mvnHome}/bin/mvn package'
             }
         }
         stage('Test') {
