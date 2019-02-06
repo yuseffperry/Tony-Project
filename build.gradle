@@ -1,0 +1,91 @@
+buildscript {
+  ext {
+    repo_maven = "http://localhost:8081/repository/maven-public/"
+    pom_version = '1.0.0.'
+    pom_artifact = 'jacoco-example-gradle'
+    pom_groupId = 'org.examples.gradle'
+  }
+  repositories {
+    maven {url "$repo_maven"}
+  }
+}
+
+plugins {
+  id "org.sonarqube" version "2.7"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectName", "${rootProject.name}"
+    property "sonar.projectKey", "jacoco.examples.gradle:jacoco-example-gradle"
+    property "sonar.jacoco.reportPaths", "${project.buildDir}/jacoco/test.exec"
+  }
+}
+
+defaultTasks 'war'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  maven{url "http://localhost:8081/repository/maven-public/"}
+}
+
+if (System.getenv("BUILD_NUMBER") == 'unspecified') {
+  pom_version = "$pom_version" + '0'
+} else {
+  pom_version = "$pom_version" + System.getenv("BUILD_NUMBER")
+}
+
+publishing.repositories {
+  maven {
+    credentials {
+      username System.getenv("NEXUS_CREDENTIALS_USR")
+      password System.getenv("NEXUS_CREDENTIALS_PSW")
+    }
+    if (prjVersion.endsWith('-SNAPSHOT')) {
+      url = "http://localhost:8081/repository/maven-snapshots/"
+      pom_version = "$pom_version" + '-SNAPSHOT'
+    } else {
+      url = "http://localhost:8081/repository/maven-releases/"
+    }
+  }
+}
+
+publishing.publications {
+  mavenJava(MavenPublication) {
+    groupId "$pom_groupId"
+    artifactId "$pom_artifact"
+    version "$pom_version"
+
+    artifact("$buildDir/libs/jacoco-example-gradle.war") {
+      extensions "war"
+    }
+  }
+}
+
+publish {
+  dependsOn build
+}
+
+dependencies {
+  compile "javax.servlet:javax.servlet-api:3.1.0.redhat-1"
+}
+
+test {
+  ignoreFailures=true
+}
+
+jacocoTestReport {
+  reports{
+    xml {
+      enabled true
+    }
+    html {
+      enabled true
+    }
+  }
+}
