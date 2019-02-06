@@ -23,7 +23,8 @@ sonarqube {
   }
 }
 
-defaultTasks 'war'
+//defaultTasks 'war'
+defaultTasks 'jar'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
@@ -66,7 +67,7 @@ publishing.publications {
     artifactId "$pom_artifact"
     version "$pom_version"
 
-    artifact("$buildDir/libs/jacoco-example-gradle.war") {
+    artifact("$buildDir/libs/jacoco-example-gradle.jar") {
       //extensions "war"
     }
   }
@@ -79,6 +80,7 @@ publish {
 dependencies {
   //compile "javax.servlet:javax.servlet-api:3.1.0.redhat-1"
   compile "javax.servlet:javax.servlet-api:4.0.1"
+  testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 test {
