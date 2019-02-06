@@ -1,6 +1,7 @@
 buildscript {
   ext {
-    repo_maven = "http://localhost:8081/repository/maven-public/"
+    //repo_maven = "http://localhost:8081/repository/maven-public/"
+    repo_maven = "http://central.maven.org/maven2/"
     pom_version = '1.0.0.'
     pom_artifact = 'jacoco-example-gradle'
     pom_groupId = 'org.examples.gradle'
@@ -27,11 +28,15 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'jacoco'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
+allprojects {
+  apply plugin: 'java'
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+}
 
 repositories {
-  maven{url "http://localhost:8081/repository/maven-public/"}
+  maven{url "http://central.maven.org/maven2/"}
 }
 
 if (System.getenv("BUILD_NUMBER") == 'unspecified') {
@@ -62,7 +67,7 @@ publishing.publications {
     version "$pom_version"
 
     artifact("$buildDir/libs/jacoco-example-gradle.war") {
-      extensions "war"
+      //extensions "war"
     }
   }
 }
@@ -72,7 +77,8 @@ publish {
 }
 
 dependencies {
-  compile "javax.servlet:javax.servlet-api:3.1.0.redhat-1"
+  //compile "javax.servlet:javax.servlet-api:3.1.0.redhat-1"
+  compile "javax.servlet:javax.servlet-api:4.0.1"
 }
 
 test {
