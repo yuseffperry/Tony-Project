@@ -21,7 +21,7 @@ pipeline {
 		      alwaysLinkToLastBuild: true,
 		      keepAll: false,
 		      reportDir: 'target/reports/tests/test',
-		      reportFiles: 'index.html'
+		      reportFiles: 'index.html',
 		      reportName: 'Jacoco Exmaple Gradle Test Results',
 		      reportTitles: ''
 		        ])
