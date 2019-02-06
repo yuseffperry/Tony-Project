@@ -16,11 +16,11 @@ pipeline {
             steps {
 		    echo 'Testing...'
 		    sh './gradlew clean test'
-		    junit allowEmptyResults: true, testResults: 'target/test-results/test/*.xml'
+		    junit allowEmptyResults: true, testResults: 'build/test-results/test/*.xml'
 		    publishHTML([allowMissing: true,
 		      alwaysLinkToLastBuild: true,
 		      keepAll: false,
-		      reportDir: 'target/reports/tests/test',
+		      reportDir: 'build/reports/tests/test',
 		      reportFiles: 'index.html',
 		      reportName: 'Jacoco Exmaple Gradle Test Results',
 		      reportTitles: ''
