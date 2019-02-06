@@ -31,7 +31,7 @@ pipeline {
             steps {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
-		    sh '${sonarqubeScannerHome}/bin/sonar-scanner -Dsonar.projectVersion=0.1'
+		    sh './gradlew sonarqube -Dsonar.projectVersion=0.1'
 		  }
             }
         }
