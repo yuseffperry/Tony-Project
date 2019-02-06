@@ -1,7 +1,6 @@
 buildscript {
   ext {
-    //repo_maven = "http://localhost:8081/repository/maven-public/"
-    repo_maven = "http://central.maven.org/maven2/"
+    repo_maven = "http://localhost:8081/repository/maven-public/"
     pom_version = '1.0.0.'
     pom_artifact = 'jacoco-example-gradle'
     pom_groupId = 'org.examples.gradle'
