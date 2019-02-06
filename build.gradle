@@ -20,7 +20,6 @@ sonarqube {
     property "sonar.projectName", "${rootProject.name}"
     property "sonar.projectKey", "jacoco.examples.gradle:jacoco-example-gradle"
     property "sonar.jacoco.reportPaths", "${project.buildDir}/jacoco/test.exec"
-    property "sonar.sources", "src"
   }
 }
 
