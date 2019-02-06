@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-	def sonarqubeScannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-    }
 
 
     stages {
@@ -32,7 +29,7 @@ pipeline {
 		    echo 'SonarQube...'
 		    withSonarQubeEnv('SonarQube') {
 		    sh './gradlew sonarqube -Dsonar.projectVersion=0.1'
-		  }
+		        }
             }
         }
         stage('Publish to Nexus') {
