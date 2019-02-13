@@ -9,10 +9,12 @@ pipeline {
             //Install MongoDB, Jira, ELK
             ansiColor('xterm') {
                 ansiblePlaybook (
-                    playbook: 'ansible/playbook.yml',
-                    inventory: 'ansible/inventory.ini',
+                    playbook: '$ansible/playbook.yml',
+                    inventory: '$ansible/inventory.ini',
+                    installation: 'ansible',
                     credentialsId: '2869f3eb-e1ed-4a1e-9c52-9bc4f7b3c8dc',
-                    colorized: true)
+                    colorized: true
+                    )
                 }
             }
         }
