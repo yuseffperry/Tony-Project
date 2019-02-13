@@ -7,6 +7,9 @@ pipeline {
             steps {
             echo 'Installing...'
             //Install MongoDB, Jira, ELK
+
+            sh 'ansible-galaxy --help'
+
             ansiColor('xterm') {
                 ansiblePlaybook (
                     playbook: '$ansible/playbook.yml',
