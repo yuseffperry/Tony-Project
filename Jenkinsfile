@@ -3,6 +3,19 @@ pipeline {
 
 
     stages {
+        stage('Ansible Installation') {
+            steps {
+            echo 'Installing...'
+            //Install MongoDB, Jira, ELK
+            ansiColor('xterm') {
+                ansiblePlaybook (
+                    playbook: 'ansible/playbook.yml',
+                    inventory: 'ansible/inventory.ini',
+                    credentialsId: '2869f3eb-e1ed-4a1e-9c52-9bc4f7b3c8dc',
+                    colorized: true)
+                }
+            }
+        }
         stage('Build') {
             steps {
 		    echo 'Building...'
@@ -32,10 +45,10 @@ pipeline {
 		        }
             }
         }
-        stage('Publish to Nexus') {
+        stage('Publish Snapshot to Artifactory') {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-nexus-upload', usernameVariable: 'NEXUS_CREDENTIALS_USR', passwordVariable: 'NEXUS_CREDENTIALS_PSW']]) {
-		    echo 'Nexus...'
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jacocoexample-artifactory-upload', usernameVariable: 'ARTIFACTORY_CREDENTIALS_USR', passwordVariable: 'ARTIFACTORY_CREDENTIALS_PSW']]) {
+		    echo 'Artifactory...'
             sh './gradlew publish'
                 }
             }
