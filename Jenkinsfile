@@ -8,8 +8,6 @@ pipeline {
             echo 'Installing...'
             //Install MongoDB, Jira, ELK
 
-            sh 'ansible-galaxy install -p roles -r requirements -f'
-
             ansiColor('xterm') {
                 ansiblePlaybook (
                     playbook: 'playbook.yml',
