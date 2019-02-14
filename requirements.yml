@@ -1,0 +1,3 @@
+- src: idealista.jira_role
+  version: 1.0.0
+  name: jira
